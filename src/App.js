@@ -46,7 +46,7 @@ class ProductTable extends React.Component {
     //save category and corresponding products in an array
     const rows = [];
     categoryArray.forEach((category)=>{
-      // search products array for entries with particular category name and save in   categoryProductsArray
+      // search products array for entries with particular category name and save in categoryProductsArray
       let categoryProductsArray = []
       this.props.products.forEach((product)=>{
         if (product.category == category){
