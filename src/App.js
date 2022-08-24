@@ -5,7 +5,7 @@
   render() {
     const category = this.props.category;
     return (
-      <tr id = {this.props.category}>
+      <tr>
         <th colSpan="2">
           {category}
         </th>
@@ -34,6 +34,8 @@ class ProductRow extends React.Component {
 
 class ProductTable extends React.Component {
   render() {
+    let filterText = this.props.filterText
+    let inStockOnly = this.props.inStockOnly
     //Save all products categories in an array
     var categoryArray = []
     this.props.products.forEach((product)=>categoryArray.push(product.category))
@@ -49,7 +51,9 @@ class ProductTable extends React.Component {
       // search products array for entries with particular category name and save in categoryProductsArray
       let categoryProductsArray = []
       this.props.products.forEach((product)=>{
-        if (product.category == category){
+        if(product.name.indexOf(filterText) === -1) return
+        if(inStockOnly && !product.stocked) return
+        if (product.category === category){
           categoryProductsArray.push(<ProductRow
             product={product}
             key={product.name} 
@@ -83,9 +87,9 @@ class SearchBar extends React.Component {
   render() {
     return (
       <form>
-        <input type="text" placeholder="Search..." />
+        <input type="text" placeholder="Search..." value={this.props.filterText} />
         <p>
-          <input type="checkbox" />
+          <input type="checkbox" checked = {this.props.inStockOnly} />
           {' '}
           Only show products in stock
         </p>
@@ -95,11 +99,16 @@ class SearchBar extends React.Component {
 }
 
 class FilterableProductTable extends React.Component {
+  
+    state = {
+      filterText: '', 
+      inStockOnly: false
+    }
   render() {
     return (
       <div>
-        <SearchBar />
-        <ProductTable products={this.props.products} />
+        <SearchBar filterText ={this.state.filterText} inStockOnly ={this.state.inStockOnly}/>
+        <ProductTable products={this.props.products} filterText ={this.state.filterText} inStockOnly ={this.state.inStockOnly} />
       </div>
     );
   }

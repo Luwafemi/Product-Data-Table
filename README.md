@@ -1,4 +1,4 @@
-## • An optimization of the Filterable Product Data Table example from the React official documentation [https://reactjs.org/docs/thinking-in-react.html](https://reactjs.org/docs/thinking-in-react.html) •
+## • An optimization of the Filterable Product Data Table example from the React official documentation [https://reactjs.org/docs/thinking-in-react.html](https://reactjs.org/docs/thinking-in-react.html) 
 
 
 
