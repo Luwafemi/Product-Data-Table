@@ -51,7 +51,7 @@ class ProductTable extends React.Component {
       // search products array for entries with particular category name and save in categoryProductsArray
       let categoryProductsArray = []
       this.props.products.forEach((product)=>{
-        if(product.name.indexOf(filterText) === -1) return
+        if(product.name.toLowerCase().indexOf(filterText.toLowerCase()) === -1) return
         if(inStockOnly && !product.stocked) return
         if (product.category === category){
           categoryProductsArray.push(<ProductRow
@@ -87,9 +87,9 @@ class SearchBar extends React.Component {
   render() {
     return (
       <form>
-        <input type="text" placeholder="Search..." value={this.props.filterText} />
+        <input type="text" placeholder="Search..." value={this.props.filterText} onChange ={(event)=>{this.props.updateFilterTextState(event)}}/>
         <p>
-          <input type="checkbox" checked = {this.props.inStockOnly} />
+          <input type="checkbox" checked = {this.props.inStockOnly} onChange ={(event)=>{this.props.updateInStockOnlyState(event)}} />
           {' '}
           Only show products in stock
         </p>
@@ -105,9 +105,15 @@ class FilterableProductTable extends React.Component {
       inStockOnly: false
     }
   render() {
+    let updateFilterTextState= (event)=>{
+       this.setState({filterText:event.target.value})
+    }
+    let updateInStockOnlyState= (event)=>{
+      this.setState({inStockOnly:event.target.checked})
+   }
     return (
       <div>
-        <SearchBar filterText ={this.state.filterText} inStockOnly ={this.state.inStockOnly}/>
+        <SearchBar filterText ={this.state.filterText} inStockOnly ={this.state.inStockOnly} updateFilterTextState = {updateFilterTextState} updateInStockOnlyState={updateInStockOnlyState}/>
         <ProductTable products={this.props.products} filterText ={this.state.filterText} inStockOnly ={this.state.inStockOnly} />
       </div>
     );

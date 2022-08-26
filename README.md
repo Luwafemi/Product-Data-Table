@@ -3,7 +3,7 @@
 
 
 
-The example from the official documentation assumes that the data (PRODUCTS) has been sorted, i.e. all products belonging to a particular category immediately follow one another. If the order is changed, for example:
+1. The example from the official documentation assumes that the data (PRODUCTS) has been sorted, i.e. all products belonging to a particular category immediately follow one another. If the order is changed, for example:
 
 ``` javascript
 const PRODUCTS = [
@@ -17,3 +17,7 @@ const PRODUCTS = [
  
 ```
 'Sporting Goods' and 'Electronics' ProductCategoryRow components would each be rendered three times. This repository fixes this issue.
+
+2. Also, the search box in the example is case sensitive. This repository fixes that as well.
+
+3. Repo also contains better styling.
