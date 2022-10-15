@@ -60,12 +60,14 @@ class ProductTable extends React.Component {
            />)
         }
       })
+     if (categoryProductsArray.length!==0){
       rows.push(
-          <ProductCategoryRow
-            category={category}
-            key={category} 
-           />,...categoryProductsArray
-        )
+        <ProductCategoryRow
+          category={category}
+          key={category} 
+         />,...categoryProductsArray
+      )
+     }
     })
     
 
